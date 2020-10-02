@@ -11,4 +11,3 @@ import dataset.cleanDs as dataset
 
 cleanedDS = dataset.clean_db()
 print(cleanedDS)
-print("Testing Purpose")
