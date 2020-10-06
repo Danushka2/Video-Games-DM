@@ -12,7 +12,7 @@ class cleanDs():
     def clean_db(self):
     
         # Defining the dataset...!
-        df = pd.read_csv('dataset/Video_Games_Sales_as_at_22_Dec_2016.csv')
+        df = pd.read_csv('Video_Games_Sales_as_at_22_Dec_2016.csv')
     
         # Removing unwanted columns for feature purposes...!
         # Sum of These 4 columes are represented as Global_Sales...!

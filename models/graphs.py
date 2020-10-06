@@ -5,13 +5,16 @@ import pandas as pd
 import seaborn as sns
 import numpy as np
 import os
-import dataset.cleanDs as dataset
+from dataset.cleanDs import cleanDs
 import matplotlib.pyplot as plt
 
 #assign cleaned database here and use it
 
-cleanedDS = dataset.clean_db()
-#print(cleanedDS)
+
+################## get data from cleanDs    ############################
+cleanDataset = cleanDs()
+cleanedDS = cleanDataset.clean_db()
+
 
 # Declaring the points for first line plot
 X1 = cleanedDS['Genre']
