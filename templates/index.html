@@ -48,32 +48,33 @@
                     <li class="active">
                         <a href="/"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
+
                     <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                    <li>
+                        <a href="#"> <i class="menu-icon fa fa-bar-chart"></i>Model 1</a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="menu-icon fa fa-area-chart"></i>Model 2</a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="menu-icon fa fa-table"></i>Model 3</a>
+                    </li>
+                    
+
+                    <h3 class="menu-title">Icons</h3><!-- /.menu-title -->
+                    <li>
+                        <a href="#"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
+                    </li>
                     <li>
                         <a href="#"> <i class="menu-icon fa fa-laptop"></i>Components</a>
                     </li>
                     <li>
-                        <a href="#"> <i class="menu-icon fa fa-table"></i>Tables</a>
+                        <a href="#"> <i class="menu-icon ti-email"></i>Widgets </a>
                     </li>
                     <li>
                         <a href="#"> <i class="menu-icon fa fa-th"></i>Forms</a>
                     </li>
 
-                    <h3 class="menu-title">Icons</h3><!-- /.menu-title -->
-
-                    <li>
-                        <a href="#"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
-                    </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                    </li>
-                    <li>
-                        <a href="#"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
-                    </li>
-
-                    <li>
-                        <a href="#"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
-                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -218,11 +219,6 @@
                             <span class="count">10468</span>
                         </h4>
                         <p class="text-light">Members online</p>
-
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                            <canvas id="widgetChart1"></canvas>
-                        </div>
-
                     </div>
 
                 </div>
@@ -249,10 +245,6 @@
                             <span class="count">10468</span>
                         </h4>
                         <p class="text-light">Members online</p>
-
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                            <canvas id="widgetChart2"></canvas>
-                        </div>
 
                     </div>
                 </div>
@@ -281,10 +273,6 @@
                         <p class="text-light">Members online</p>
 
                     </div>
-
-                    <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                        <canvas id="widgetChart3"></canvas>
-                    </div>
                 </div>
             </div>
             <!--/.col-->
@@ -309,10 +297,6 @@
                             <span class="count">10468</span>
                         </h4>
                         <p class="text-light">Members online</p>
-
-                        <div class="chart-wrapper px-3" style="height:70px;" height="70">
-                            <canvas id="widgetChart4"></canvas>
-                        </div>
 
                     </div>
                 </div>
@@ -394,20 +378,10 @@
             </div>
             <!--/.col-->
 
-            <div class="col-xl-6">
+            <div class="col-xl-6 col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h4 class="card-title mb-0">Traffic</h4>
-                                <div class="small text-muted">October 2017</div>
-                            </div>
-                        </div>
-                        <!--/.row-->
-                        <div class="chart-wrapper mt-4">
-                            <canvas id="trafficChart" style="height:200px;" height="200"></canvas>
-                        </div>
-
+                        <img src={{ url}} alt="Chart" height="auto" width="100%">
                     </div>
                 </div>
             </div>
@@ -440,13 +414,35 @@
                 </div>
             </div>
 
-            <div class="col-xl-6 col-lg-6">
+            <div class="col-xl-3 col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <img src={{ url}} alt="Chart" height="auto" width="100%">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Total Profit</div>
+                                <div class="stat-digit">1,012</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-xl-3 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">New Customer</div>
+                                <div class="stat-digit">961</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
@@ -474,12 +470,12 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>
     
     <script src="https://drive.google.com/file/d/1fzWPwjGlEBECx4lbSRhuv79QhaGPI2JJ/view?usp=sharing"></script> -->
-        <!-- 
-    <script src="{{ url_for('static', filename='assets/js/dashboard.js') }}"></script>
+        
+    <!-- <script src="{{ url_for('static', filename='assets/js/dashboard.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/widgets.js') }}"></script>
     <script src="{{ url_for('static', filename='vendors/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script>
- -->
+    <script src="{{ url_for('static', filename='vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script> -->
+
 
 
 </body>
