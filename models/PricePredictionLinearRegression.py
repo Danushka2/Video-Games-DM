@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 
 #import dataset
-dataset = pd.read_csv('dataset/Video_Games_Sales_as_at_22_Dec_2016.csv')
+dataset = pd.read_csv('Video_Games_Sales_as_at_22_Dec_2016.csv')
 XY_Combined = dataset[['Name','Year_of_Release','Platform','Genre','Publisher','Developer','Global_Sales']]
 
 # remove missing values

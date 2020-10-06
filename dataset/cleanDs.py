@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
+
 # Importing
 import numpy as np
 import pandas as pd
 from scipy import stats
 import seaborn as sns
 import os
+
 class cleanDs():
     
     def clean_db(self):
