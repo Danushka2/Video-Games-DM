@@ -35,23 +35,19 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(x,Y, test_size=0.5, random_state = 42)
 
 # Do feature scaling
-from sklearn.preprocessing import StandardScaler
+#from sklearn.preprocessing import StandardScaler
 
-sc_X = StandardScaler()
+#sc_X = StandardScaler()
 # feature scale x train and x test
-X_train = sc_X.fit_transform(X_train)
-X_test = sc_X.transform(X_test)
-
-sc_Y = StandardScaler()
-# feature scale y train
-y_train = sc_Y.fit_transform(y_train.reshape(-1,1))
+#X_train = sc_X.fit_transform(X_train)
+#X_test = sc_X.transform(X_test)
 
 
 #Fitting Multiple Linear Regression to training set
 from sklearn.linear_model import LinearRegression
 regressor = LinearRegression()
 regressor.fit(X_train, y_train)
-
+regressor.score(X_train,y_train) #0.006469977801547233
 # Predicting the test set results
 y_pred = regressor.predict(X_test)
 
@@ -61,9 +57,9 @@ import statsmodels.api as sm
 # add b0 constant
 x = np.append(arr=np.ones((9904,1)).astype(int), values=x ,axis=1)
 
-#x_opt = x[:,[0,1,2,3,4,5,6]]
-#regressor_ols = sm.OLS(endog = Y,exog = x_opt).fit()
-#regressor_ols.summary()
+x_opt = x[:,[0,1,2,3,4,5,6]]
+regressor_ols = sm.OLS(endog = Y,exog = x_opt).fit()
+regressor_ols.summary()
 
 # final regression model only depend on developer ,platform and year
 x_opt = x[:,[0,2,3,6]]
