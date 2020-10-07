@@ -32,17 +32,20 @@ def predicSales():
     return render_template('sale-prediction.html', prediction_text='$ {}'.format(output))
 
 
-@app.route('/p-sales-new')
+@app.route('/p-sales-new', methods=['POST'])
 def predicSalesNew():
 
+    saleYear = int(request.form['saleYear'])
+    salePlatform = request.form['salePlatform']
+    saleGnre = request.form['saleGnre']
+    salePublisher = request.form['salePublisher']
+    saleDeveloper = request.form['saleDeveloper']
+    
     model = pickle.load(open('DecisionTreeRegression.pkl','rb'))
 
-    df[['Year_of_Release','Platform','Genre','Publisher','Developer']].iloc[0]
-
-    new_row = {'Year_of_Release':1985, 'Platform':'NES', 'Genre':'Platform', 'Publisher':'Nintendo', 'Developer':'Open Source'}
+    new_row = {'Year_of_Release':saleYear, 'Platform': salePlatform, 'Genre': saleGnre, 'Publisher': salePublisher, 'Developer': saleDeveloper}
     df_Apnd = df.append(new_row, ignore_index=True)
 
-    df_Apnd[['Year_of_Release','Platform','Genre','Publisher','Developer']].iloc[-1]
 
     ##################  Get features and labels     ######################
     newDF2 = df_Apnd[['Year_of_Release','Platform','Genre','Publisher','Developer']]
@@ -61,6 +64,7 @@ def predicSalesNew():
 
     #print(model.predict(k.reshape(1,-1)))
     output = model.predict(l.reshape(1,-1))[0]
+    print(output)
     
     return render_template('sale-prediction.html', rVal = output)
 
