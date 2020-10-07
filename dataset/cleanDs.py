@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 # Importing
+import os
 import numpy as np
 import pandas as pd
-from scipy import stats
 import seaborn as sns
-import os
+from scipy import stats
+
 
 class cleanDs():
     
@@ -47,7 +48,3 @@ class cleanDs():
         df['User_Count'] = df['User_Count'].replace(0.0, round((np.mean(df['User_Count'])), 2))
     
         return df
-    
-if __name__ == '__main__':
-    dataset = cleanDs()
-    print(dataset.clean_db())
