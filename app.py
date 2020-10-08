@@ -109,6 +109,37 @@ def genreClassify():
     return render_template('genre-classify.html', genre = pred)
 
 
+@app.route('/uscore-predict')
+def usPredict():
+    return render_template('uscore-prediction.html')
+
+
+@app.route('/user-score-p', methods=['POST'])
+def usPrediction():
+    
+    cScore = float(request.form['cScore'])
+    gSales = float(request.form['gSales'])
+    cCount = float(request.form['cCount'])
+    
+
+    model = pickle.load(open('MultipleLinearRegression.pkl','rb'))
+    # predict using a value
+
+    new_row = {'Critic_Score': cScore, 'Global_Sales': gSales, 'Critic_Count':cCount}
+    df_Apnd = df.append(new_row, ignore_index=True)
+
+    ##################  Get features and labels     ######################
+    newDF2 = df_Apnd[['Critic_Score','Global_Sales','Critic_Count']]
+    M = newDF2
+    N = df_Apnd.iloc[:,5].values
+
+    l = M.iloc[-1].values
+
+    pred = model.predict(l.reshape(1,-1))[0]
+    pred = round(pred, 2)
+    
+    return render_template('uscore-prediction.html', score = pred)
+
 
 
 
