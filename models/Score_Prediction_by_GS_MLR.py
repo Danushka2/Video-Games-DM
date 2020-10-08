@@ -1,6 +1,7 @@
 # -- coding: utf-8 --
 
 import os
+import pickle
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -127,3 +128,35 @@ print("Explain variance score =", round(sm.explained_variance_score(Y_test,y_pre
 print("R2 score =", round(sm.r2_score(Y_test,y_pred), 2))
 
 print(regr.score(X_test,Y_test))
+
+print("-------------------------------------------")
+
+# Create a serializable object with pickle
+# saving model to disk
+pickle.dump(regr,open('MultipleLinearRegression.pkl','wb'))
+
+# testing the model
+model = pickle.load(open('MultipleLinearRegression.pkl','rb'))
+# predict using a value
+
+
+df[['Critic_Score','Global_Sales','Critic_Count']].iloc[0]
+
+new_row = {'Critic_Score':23.21, 'Global_Sales':91, 'Critic_Count':64}
+df_Apnd = df.append(new_row, ignore_index=True)
+
+df_Apnd[['Critic_Score','Global_Sales','Critic_Count']].iloc[-1]
+
+##################  Get features and labels     ######################
+newDF2 = df_Apnd[['Critic_Score','Global_Sales','Critic_Count']]
+M = newDF2
+N = df_Apnd.iloc[:,5].values
+
+###################  Encoding #########################
+objList2 = M.select_dtypes(include = "object").columns
+
+
+l = M.iloc[-1].values
+
+#print(model.predict(k.reshape(1,-1)))
+print(model.predict(l.reshape(1,-1)))
