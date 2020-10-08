@@ -1,4 +1,4 @@
-#FDM Data Mining Project
+# FDM Data Mining Project
 
 This is the project which was given as an Assignment from SLIIT for the subject Fundamentals of Data Mining.
 
