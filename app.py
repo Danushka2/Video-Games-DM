@@ -69,6 +69,46 @@ def predicSalesNew():
     return render_template('sale-prediction.html', rVal = output)
 
 
+@app.route('/genre-classify')
+def cGenre():
+    return render_template('genre-classify.html')
+
+@app.route('/c-genre', methods=['POST'])
+def genreClassify():
+
+    model = pickle.load(open('GenreClassifier.pkl','rb'))
+
+    gameName = request.form['gameName']
+    gamePlatform = request.form['gamePlatform']
+    gameYear = int(request.form['gameYear'])
+    gamePublisher = request.form['gamePublisher']
+    gameRating = request.form['gameRating']
+    
+
+#    new_row = {'Name': 'Call of Duty: Black Ops II','Platform':'PS3','Year_of_Release':2012, 'Publisher':'Activision', 'Rating':'E'}
+    new_row = {'Name': gameName,'Platform': gamePlatform,'Year_of_Release': gameYear, 'Publisher': gamePublisher, 'Rating': gameRating}
+
+    df_Apnd = df.append(new_row, ignore_index=True)
+
+    df_Apnd[['Name','Platform','Year_of_Release','Publisher','Rating']].iloc[-1]
+
+    newDF2 = df_Apnd[['Name','Platform','Year_of_Release','Publisher','Rating']]
+    M = newDF2
+    N = df_Apnd.iloc[:,5].values
+
+    objList2 = ['Name','Platform','Year_of_Release','Publisher','Rating']
+    le = LabelEncoder()
+
+    for feat2 in objList2:
+        M[feat2] = le.fit_transform(M[feat2].astype(str))
+
+    l = M.iloc[-1].values
+
+    pred = model.predict(l.reshape(-1, 5))[0]
+    
+    return render_template('genre-classify.html', genre = pred)
+
+
 
 
 
