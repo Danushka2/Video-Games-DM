@@ -31,6 +31,7 @@ for feat in objList:
 
 # Find Optimal Clusters
 from sklearn.cluster import KMeans
+from mpl_toolkits.mplot3d import Axes3D
 
 # within cluster sum of squared
 wcss = []

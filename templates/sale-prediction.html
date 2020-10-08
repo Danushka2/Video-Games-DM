@@ -8,7 +8,7 @@
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- <link rel="stylesheet" href="https://fdm-assignment.s3.us-east-2.amazonaws.com/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://fdm-assignment.s3.us-east-2.amazonaws.com/bootstrap.min.css">
 
 
     <link rel="stylesheet" href="{{ url_for('static', filename='vendors/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='vendors/jqvmap/dist/jqvmap.min.css') }}">
 
 
-    <!-- <link rel="stylesheet" href="https://fdm-assignment.s3.us-east-2.amazonaws.com/style.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+    <link rel="stylesheet" href="https://fdm-assignment.s3.us-east-2.amazonaws.com/style.css">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}"> -->
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -203,27 +203,39 @@
             <div class="ml-form">
                 <div class="container-model-form row">
 
-                    <form action="/p-sales" method="post" class="ml-form-form validate-form col-md-6">
+                    <form action="/p-sales-new" method="post" class="ml-form-form validate-form col-md-6">
 
                         <h2 style="text-align: center;">Predict the sales</h2>
                         <p class="mt-5 w-75 m-auto" style="text-align: center; font-family: 'Open Sans';">Lorem ipsum
                             dolor sit amet consectetur adipisicing elit.</p>
 
                         <div class="wrap-input1 validate-input mt-3" data-validate="Name is required">
-                            <input class="input1" type="text" name="experience" placeholder="Experience"
-                                placeholder="Name">
+                            <input class="input1" type="text" name="saleYear"
+                                placeholder="Sale Year">
+                            <span class="shadow-input1"></span>
+                        </div>
+
+                        <div class="wrap-input1 validate-input mt-3" data-validate="Name is required">
+                            <input class="input1" type="text" name="salePlatform"
+                                placeholder="Platform">
+                            <span class="shadow-input1"></span>
+                        </div>
+
+                        <div class="wrap-input1 validate-input mt-3" data-validate="Name is required">
+                            <input class="input1" type="text" name="saleGnre"
+                                placeholder="Genre">
                             <span class="shadow-input1"></span>
                         </div>
 
                         <div class="wrap-input1 validate-input" data-validate="Subject is required">
-                            <input class="input1" type="text" name="test_score" placeholder="Test Score"
-                                placeholder="Subject">
+                            <input class="input1" type="text" name="salePublisher"
+                                placeholder="Publisher">
                             <span class="shadow-input1"></span>
                         </div>
 
                         <div class="wrap-input1 validate-input" data-validate="Subject is required">
-                            <input class="input1" type="text" name="interview_score" placeholder="Interview Score"
-                                placeholder="Subject">
+                            <input class="input1" type="text" name="saleDeveloper"
+                                placeholder="Developer">
                             <span class="shadow-input1"></span>
                         </div>
 
@@ -235,8 +247,11 @@
                                 </span>
                             </button>
                         </div>
-
-                        <div class="col-md-8 mt-3">
+                    </form>
+                    <div class="ml-form-pic js-tilt col-md-6" data-tilt>
+                        <img src="static/images/ml-model.png" alt="IMG">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8 mt-3 ml-result">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="stat-widget-one">
@@ -244,15 +259,13 @@
                                         </div>
                                         <div class="stat-content dib">
                                             <div class="stat-text">Predicted Sales</div>
-                                            <div class="stat-digit">{{ prediction_text }}</div>
+                                            <div class="stat-digit">{{ rVal }}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                    <div class="ml-form-pic js-tilt col-md-6" data-tilt>
-                        <img src="static/images/ml-model.png" alt="IMG">
+                        <div class="col-md-2"></div>
                     </div>
 
                     <!-- Main Input For Receiving Query to our ML -->
