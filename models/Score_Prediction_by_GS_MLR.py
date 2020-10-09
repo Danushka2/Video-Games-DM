@@ -147,16 +147,15 @@ df_Apnd = df.append(new_row, ignore_index=True)
 
 df_Apnd[['Critic_Score','Global_Sales','Critic_Count']].iloc[-1]
 
-##################  Get features and labels     ######################
+# Get features and labels
 newDF2 = df_Apnd[['Critic_Score','Global_Sales','Critic_Count']]
 M = newDF2
 N = df_Apnd.iloc[:,5].values
 
-###################  Encoding #########################
+# Encoding
 objList2 = M.select_dtypes(include = "object").columns
 
 
 l = M.iloc[-1].values
 
-#print(model.predict(k.reshape(1,-1)))
 print(model.predict(l.reshape(1,-1)))
