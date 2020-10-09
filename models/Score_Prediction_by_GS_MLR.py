@@ -1,10 +1,8 @@
 # -- coding: utf-8 --
 
-import os
+
 import pickle
-import numpy as np
-import pandas as pd
-import seaborn as sns
+import numpy
 from scipy import stats
 import matplotlib.pyplot as plt
 from dataset.cleanDs import cleanDs
@@ -32,7 +30,6 @@ plt.ylabel('User_Score', fontsize=14)
 plt.grid(True)
 plt.plot(x, mymodel)
 plt.show()
-import numpy
 
 print("Coefficient between Global_Sales Vs User_Score",numpy.corrcoef(x, y))
 
@@ -55,7 +52,6 @@ plt.ylabel('User_Score', fontsize=14)
 plt.grid(True)
 plt.plot(x, mymodel)
 plt.show()
-import numpy
 
 print("Coefficient between Critic_Score Vs User_Score", numpy.corrcoef(x, y))
 
@@ -78,7 +74,6 @@ plt.ylabel('User_Score', fontsize=14)
 plt.grid(True)
 plt.plot(x, mymodel)
 plt.show()
-import numpy
 
 print("Coefficient between Critic_Count Vs User_Score", numpy.corrcoef(x, y))
 
