@@ -625,7 +625,7 @@
   border-color: #343a40; }
 
 .social-box {
-  min-height: 160px;
+  min-height: 100px;
   margin-bottom:24px;
   margin-bottom: 1.5rem;
   text-align: center;
@@ -1781,7 +1781,7 @@ header .form-inline {
   padding-right: 10px; }
 
 .social-box i {
-  line-height: 110px; }
+  line-height: 80px; }
 
 .social-box ul {
   display: inline-block;
@@ -2537,7 +2537,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p {
-	font-family: Montserrat-Regular;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;

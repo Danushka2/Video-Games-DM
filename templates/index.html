@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://fdm-assignment.s3.us-east-2.amazonaws.com/bootstrap.min.css">
 
-    
+
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='vendors/bootstrap/dist/css/bootstrap.min.css') }}"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='vendors/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='vendors/themify-icons/css/themify-icons.css') }}">
@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='vendors/jqvmap/dist/jqvmap.min.css') }}">
 
 
-    <link rel="stylesheet" href="https://fdm-assignment.s3.us-east-2.amazonaws.com/style.css">
+    <!-- <link rel="stylesheet" href="https://fdm-assignment.s3.us-east-2.amazonaws.com/style.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -57,9 +58,9 @@
                         <a href="/genre-classify"> <i class="menu-icon fa fa-area-chart"></i>Classify Genre</a>
                     </li>
                     <li>
-                        <a href="#"> <i class="menu-icon fa fa-table"></i>Model 3</a>
+                        <a href="/uscore-clustering"> <i class="menu-icon fa fa-table"></i>Cluster User Score</a>
                     </li>
-                    
+
 
                     <h3 class="menu-title">Icons</h3><!-- /.menu-title -->
                     <li>
@@ -162,7 +163,7 @@
 
             <div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-flat-color-1">
-                    <div class="card-body pb-0">
+                    <div class="card-body pb-3">
                         <div class="dropdown float-right">
                             <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
                                 id="dropdownMenuButton1" data-toggle="dropdown">
@@ -188,7 +189,7 @@
 
             <div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-flat-color-2">
-                    <div class="card-body pb-0">
+                    <div class="card-body pb-3">
                         <div class="dropdown float-right">
                             <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
                                 id="dropdownMenuButton2" data-toggle="dropdown">
@@ -214,7 +215,7 @@
 
             <div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-flat-color-3">
-                    <div class="card-body pb-0">
+                    <div class="card-body pb-3">
                         <div class="dropdown float-right">
                             <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
                                 id="dropdownMenuButton3" data-toggle="dropdown">
@@ -238,9 +239,9 @@
             </div>
             <!--/.col-->
 
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-3 ">
                 <div class="card text-white bg-flat-color-4">
-                    <div class="card-body pb-0">
+                    <div class="card-body pb-3">
                         <div class="dropdown float-right">
                             <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
                                 id="dropdownMenuButton4" data-toggle="dropdown">
@@ -327,7 +328,7 @@
                     <ul>
                         <li>
                             <span class="count">94</span> k
-                            <span>followers</span>
+                            <span>friends</span>
                         </li>
                         <li>
                             <span class="count">92</span>
@@ -339,71 +340,12 @@
             </div>
             <!--/.col-->
 
-            <div class="col-xl-6 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <img src={{ url}} alt="Chart" height="auto" width="100%">
-                    </div>
-                </div>
+            {% for id in ids %}
+            <div class="col-md-6">
+                <div id="{{id}}"></div>
             </div>
+            {% endfor %}
 
-            <div class="col-xl-3 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">Total Profit</div>
-                                <div class="stat-digit">1,012</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">New Customer</div>
-                                <div class="stat-digit">961</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">Total Profit</div>
-                                <div class="stat-digit">1,012</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">New Customer</div>
-                                <div class="stat-digit">961</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
@@ -424,18 +366,35 @@
         integrity="sha256-ycJeXbll9m7dHKeaPbXBkZH8BuP99SmPm/8q5O+SbBc=" crossorigin="anonymous"></script>
 
 
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+
     <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
     <!-- 
     <script src="{{ url_for('static', filename='vendors/chart.js/dist/Chart.bundle.min.js') }}"></script> -->
-    
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>
     
     <script src="https://drive.google.com/file/d/1fzWPwjGlEBECx4lbSRhuv79QhaGPI2JJ/view?usp=sharing"></script> -->
-        
+
     <!-- <script src="{{ url_for('static', filename='assets/js/dashboard.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/widgets.js') }}"></script>
     <script src="{{ url_for('static', filename='vendors/jqvmap/dist/jquery.vmap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script> -->
+
+    <script type="text/javascript">
+
+        var graphs = {{ graphJSON | safe}};
+        var ids = {{ ids | safe}};
+
+        for (var i in graphs) {
+            Plotly.plot(ids[i], // the ID of the div, created above
+                graphs[i].data,
+                graphs[i].layout || {});
+        }
+
+    </script>
 
 
 
