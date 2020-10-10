@@ -6,5 +6,5 @@ save_non_project_files = False
 
 [main]
 version = 0.2.0
-recent_files = ['app.py', 'request.py', 'dataset\\cleanDs.py', 'models\\PricePredictionDecisionTreeModel.py', 'models\\User_Score_Prediction_Clustering.py']
+recent_files = ['app.py', 'models\\PricePredictionDecisionTreeModel.py', 'models\\GenreClassification.py', 'models\\Score_Prediction_by_GS_MLR.py']
 

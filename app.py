@@ -21,16 +21,6 @@ def home():
 def pSales():
     return render_template('sale-prediction.html')
 
-@app.route('/p-sales',methods=['POST'])
-def predicSales():
-    int_features = [int(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
-    prediction = model.predict(final_features)
-
-    output = round(prediction[0], 2)
-
-    return render_template('sale-prediction.html', prediction_text='$ {}'.format(output))
-
 
 @app.route('/p-sales-new', methods=['POST'])
 def predicSalesNew():
@@ -138,7 +128,7 @@ def usPrediction():
     pred = model.predict(l.reshape(1,-1))[0]
     pred = round(pred, 2)
     
-    return render_template('uscore-prediction.html', score = pred)
+    return render_template('sale-prediction.html', rVal = gSales, score = pred)
 
 
 
