@@ -1,10 +1,8 @@
 # -- coding: utf-8 --
 
-import os
+
 import pickle
-import numpy as np
-import pandas as pd
-import seaborn as sns
+import numpy
 from scipy import stats
 import matplotlib.pyplot as plt
 from dataset.cleanDs import cleanDs
@@ -32,9 +30,8 @@ plt.ylabel('User_Score', fontsize=14)
 plt.grid(True)
 plt.plot(x, mymodel)
 plt.show()
-import numpy
 
-print(numpy.corrcoef(x, y))
+print("Coefficient between Global_Sales Vs User_Score",numpy.corrcoef(x, y))
 
 # Creating plot with Critic_Score & User_Score
 x = df['Critic_Score']
@@ -55,9 +52,8 @@ plt.ylabel('User_Score', fontsize=14)
 plt.grid(True)
 plt.plot(x, mymodel)
 plt.show()
-import numpy
 
-print(numpy.corrcoef(x, y))
+print("Coefficient between Critic_Score Vs User_Score", numpy.corrcoef(x, y))
 
 # Creating plot with Critic_Count & User_Score
 x = df['Critic_Count']
@@ -78,9 +74,8 @@ plt.ylabel('User_Score', fontsize=14)
 plt.grid(True)
 plt.plot(x, mymodel)
 plt.show()
-import numpy
 
-print(numpy.corrcoef(x, y))
+print("Coefficient between Critic_Count Vs User_Score", numpy.corrcoef(x, y))
 
 
 
@@ -91,7 +86,7 @@ import statsmodels.api as sm
 X = df[['Critic_Score','Global_Sales','Critic_Count']]
 Y = df['User_Score']
 
-X_train, X_test,Y_train, Y_test = train_test_split(X,Y, test_size=0.2, random_state=0)
+X_train, X_test,Y_train, Y_test = train_test_split(X,Y, test_size=0.2, random_state=42)
 
 # with sklearn
 regr = linear_model.LinearRegression()
@@ -104,9 +99,9 @@ print('Coefficients: \n', regr.coef_)
 print(pd.DataFrame({'Actual':Y_test,'Predicted':y_pred}))
 
 # prediction with sklearn
-Global_Sales = 23.21
-Critic_Score = 91
-Critic_Count = 64
+Global_Sales = 82.53
+Critic_Score = 76
+Critic_Count = 51
 
 print('Predicted User Score: \n', regr.predict([[Global_Sales, Critic_Score, Critic_Count]]))
 
@@ -142,21 +137,20 @@ model = pickle.load(open('MultipleLinearRegression.pkl','rb'))
 
 df[['Critic_Score','Global_Sales','Critic_Count']].iloc[0]
 
-new_row = {'Critic_Score':23.21, 'Global_Sales':91, 'Critic_Count':64}
+new_row = {'Critic_Score':76, 'Global_Sales':82.53, 'Critic_Count':51}
 df_Apnd = df.append(new_row, ignore_index=True)
 
 df_Apnd[['Critic_Score','Global_Sales','Critic_Count']].iloc[-1]
 
-##################  Get features and labels     ######################
+# Get features and labels
 newDF2 = df_Apnd[['Critic_Score','Global_Sales','Critic_Count']]
 M = newDF2
-N = df_Apnd.iloc[:,5].values
+N = df_Apnd.iloc[:,3].values
 
-###################  Encoding #########################
+# Encoding
 objList2 = M.select_dtypes(include = "object").columns
 
 
 l = M.iloc[-1].values
 
-#print(model.predict(k.reshape(1,-1)))
 print(model.predict(l.reshape(1,-1)))
