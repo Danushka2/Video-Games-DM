@@ -50,15 +50,15 @@
                         <a href="/"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
 
-                    <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                    <h3 class="menu-title">DM Models</h3><!-- /.menu-title -->
                     <li>
-                        <a href="/predict-sales"> <i class="menu-icon fa fa-bar-chart"></i>Predict Sales</a>
+                        <a href="/predict-sales"> <i class="menu-icon fa fa-bar-chart"></i>Sales/User Score</a>
                     </li>
                     <li>
-                        <a href="/genre-classify"> <i class="menu-icon fa fa-area-chart"></i>Classify Genre</a>
+                        <a href="/genre-classify"> <i class="menu-icon fa fa-area-chart"></i>Genre</a>
                     </li>
                     <li>
-                        <a href="/uscore-clustering"> <i class="menu-icon fa fa-table"></i>Cluster User Score</a>
+                        <a href="/uscore-clustering"> <i class="menu-icon fa fa-table"></i>User Score</a>
                     </li>
 
 
@@ -210,32 +210,27 @@
                             dolor sit amet consectetur adipisicing elit.</p>
 
                         <div class="wrap-input1 validate-input mt-3" data-validate="Name is required">
-                            <input class="input1" type="text" name="gameName"
-                                placeholder="Game Name">
+                            <input class="input1" type="text" name="gameName" placeholder="Game Name">
                             <span class="shadow-input1"></span>
                         </div>
 
                         <div class="wrap-input1 validate-input mt-3" data-validate="Name is required">
-                            <input class="input1" type="text" name="gamePlatform"
-                                placeholder="Platform">
+                            <input class="input1" type="text" name="gamePlatform" placeholder="Platform">
                             <span class="shadow-input1"></span>
                         </div>
 
                         <div class="wrap-input1 validate-input mt-3" data-validate="Name is required">
-                            <input class="input1" type="text" name="gameYear"
-                                placeholder="Year">
+                            <input class="input1" type="text" name="gameYear" placeholder="Year">
                             <span class="shadow-input1"></span>
                         </div>
 
                         <div class="wrap-input1 validate-input" data-validate="Subject is required">
-                            <input class="input1" type="text" name="gamePublisher"
-                                placeholder="Publisher">
+                            <input class="input1" type="text" name="gamePublisher" placeholder="Publisher">
                             <span class="shadow-input1"></span>
                         </div>
 
                         <div class="wrap-input1 validate-input" data-validate="Subject is required">
-                            <input class="input1" type="text" name="gameRating"
-                                placeholder="Rating">
+                            <input class="input1" type="text" name="gameRating" placeholder="Rating">
                             <span class="shadow-input1"></span>
                         </div>
 
@@ -248,21 +243,29 @@
                             </button>
                         </div>
                     </form>
-                    <div class="ml-form-pic js-tilt col-md-6" data-tilt>
-                        <img src="static/images/ml-model.png" alt="IMG">
+                    <div class="ml-form-pic col-md-6">
+                        {% for id in ids %}
+                        <div class="col-md-12">
+                            <div id="{{id}}"></div>
+                        </div>
+                        {% endfor %}
+
                         <div class="col-md-2"></div>
-                        <div class="col-md-8 mt-3 ml-result">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-one">
-                                        <div class="stat-icon dib"><i class="ti-money text-success border-success"></i>
-                                        </div>
-                                        <div class="stat-content dib">
-                                            <div class="stat-text">Classified Genre</div>
-                                            <div class="stat-digit">{{ genre }}</div>
-                                        </div>
+                        <div class="col-md-8 mt-4 mx-auto">
+                            <div class="card text-white bg-flat-color-1" style="border-radius: 5px;">
+                                <div class="card-body pb-3">
+                                    <div class="dropdown float-right">
+                                        <button class="btn bg-transparent dropdown-toggle theme-toggle text-light"
+                                            type="button" id="dropdownMenuButton1" data-toggle="dropdown">
+                                            <i class="fa fa-cog"></i>
+                                        </button>
                                     </div>
+                                    <h4 class="mb-0">
+                                        <span class="count">{{ genre }}</span>
+                                    </h4>
+                                    <p class="text-light">Genre</p>
                                 </div>
+
                             </div>
                         </div>
                         <div class="col-md-2"></div>
@@ -307,6 +310,10 @@
     </script>
 
 
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+
     <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
     <!-- 
     <script src="{{ url_for('static', filename='vendors/chart.js/dist/Chart.bundle.min.js') }}"></script> -->
@@ -320,6 +327,18 @@
     <script src="{{ url_for('static', filename='vendors/jqvmap/dist/jquery.vmap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script> -->
 
+    <script type="text/javascript">
+
+        var graphs = {{ graphJSON | safe}};
+        var ids = {{ ids | safe}};
+
+        for (var i in graphs) {
+            Plotly.plot(ids[i], // the ID of the div, created above
+                graphs[i].data,
+                graphs[i].layout || {});
+        }
+
+    </script>
 
 
 </body>

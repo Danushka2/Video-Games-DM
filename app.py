@@ -11,6 +11,7 @@ import plotly
 import plotly.graph_objs as go
 import json
 import pandas as pd
+import plotly.express as px
 
 app = Flask(__name__)
 model = pickle.load(open('testModel.pkl', 'rb'))
@@ -29,13 +30,13 @@ def home():
         dict(
             data=[
                 dict(
-                    x = df['Genre'],
+                    x = df['Platform'],
                     y = df['Global_Sales'],
                     type='bar'
                 ),
             ],
             layout=dict(
-                title='Bar Chart'
+                title='Platform vs Glable Sales'
             )
         ),
 
@@ -45,7 +46,7 @@ def home():
                 )
             ],
             layout=dict(
-                title='Pie Chart'
+                title='Genre vs Globle Sales'
             )
         )
     ]
@@ -135,7 +136,40 @@ def usPrediction():
 
 @app.route('/genre-classify')
 def cGenre():
-    return render_template('genre-classify.html')
+    #return render_template('genre-classify.html')
+    graphs = [
+        dict(
+            data=[
+                dict(
+                    x = df['Genre'],
+                    y = df['Global_Sales'],
+                    type='scatter',
+                    mode = 'markers',
+                    transforms = [dict(
+                        type = 'aggregate',
+                        groups = df['Global_Sales'],
+                        aggregations = [dict(
+                        target = 'y', func = 'sum', enabled = True),
+                        ]
+                    )]
+                ),
+            ],
+            layout=dict(
+                title='Avarage Glable Sales'
+            )
+        )
+    ]
+
+    ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
+
+    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('genre-classify.html',
+                           ids=ids,
+                           graphJSON=graphJSON)
+
+
+
 
 @app.route('/c-genre', methods=['POST'])
 def genreClassify():
@@ -170,14 +204,69 @@ def genreClassify():
 
     pred = model.predict(l.reshape(-1, 5))[0]
     
-    return render_template('genre-classify.html', genre = pred)
+    graphs = [
+        dict(
+            data=[
+                dict(
+                    x = df['Genre'],
+                    y = df['Global_Sales'],
+                    type='scatter',
+                    mode = 'markers',
+                    transforms = [dict(
+                        type = 'aggregate',
+                        groups = df['Global_Sales'],
+                        aggregations = [dict(
+                        target = 'y', func = 'sum', enabled = True),
+                        ]
+                    )]
+                ),
+            ],
+            layout=dict(
+                title='Avarage Glable Sales'
+            )
+        )
+    ]
+
+    ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
+
+    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('genre-classify.html',
+                           ids=ids,
+                           graphJSON=graphJSON,
+                           genre = pred)
+    
+    #return render_template('genre-classify.html', genre = pred)
 
 
 ############################# User Score Clustering ######################################
 
 @app.route('/uscore-clustering')
 def uscoreCluster():
-    return render_template('uscore-cluster.html')
+    #return render_template('uscore-cluster.html')
+    
+    dfs = df[['Global_Sales','User_Score','Critic_Score']]
+    figx = px.scatter_3d(dfs, x='Global_Sales', y='User_Score', z='Critic_Score')
+    
+    figx.update_layout(
+        margin=dict(l=0, r=0, b=0, t=0),
+        autosize = True
+        )
+    
+    graphs = [
+        figx
+    ]
+
+    ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
+
+    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('uscore-cluster.html',
+                           ids=ids,
+                           graphJSON=graphJSON)
+
+
+
 
 @app.route('/us-cluster', methods=['POST'])
 def usCluster():
@@ -219,7 +308,28 @@ def usCluster():
         pred = "Cluster D"
 
     
-    return render_template('uscore-cluster.html', score = pred)
+    dfs = df[['Global_Sales','User_Score','Critic_Score']]
+    figx = px.scatter_3d(dfs, x='Global_Sales', y='User_Score', z='Critic_Score')
+    
+    figx.update_layout(
+        margin=dict(l=0, r=0, b=0, t=0),
+        autosize = True
+        )
+    
+    graphs = [
+        figx
+    ]
+
+    ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
+
+    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('uscore-cluster.html',
+                           ids=ids,
+                           graphJSON=graphJSON,
+                           score = pred)
+
+    #return render_template('uscore-cluster.html', score = pred)
 
 
 
@@ -231,31 +341,23 @@ def usCluster():
 
 @app.route('/test')
 def indexT():
-#    rng = pd.date_range('1/1/2011', periods=7500, freq='H')
-#    ts = pd.Series(np.random.randn(len(rng)), index=rng)
-
+    
+   
+    import plotly.express as px
+    dfs = df[['Global_Sales','User_Score','Critic_Score']]
+    figx = px.scatter_3d(dfs, x='Global_Sales', y='User_Score', z='Critic_Score')
+    
+    figx.update_layout(
+        margin=dict(l=0, r=0, b=0, t=0),
+        autosize = True
+        )
+    
     graphs = [
-        dict(
-            # Create a trace
-            data = [go.Scatter3d(
-                x = df['Global_Sales'],
-                y = df['User_Score'],
-                z = df['Critic_Score'],
-                mode = 'markers',marker = dict(
-                  size = 12,
-                  colorscale = 'Viridis'
-                  )
-                )]
-            )
+        figx
     ]
 
-    # Add "ids" to each of the graphs to pass up to the client
-    # for templating
     ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
 
-    # Convert the figures to JSON
-    # PlotlyJSONEncoder appropriately converts pandas, datetime, etc
-    # objects to their JSON equivalents
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
 
     return render_template('test.html',

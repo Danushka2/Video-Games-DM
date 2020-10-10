@@ -50,15 +50,15 @@
                         <a href="/"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
 
-                    <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                    <h3 class="menu-title">DM Models</h3><!-- /.menu-title -->
                     <li>
-                        <a href="/predict-sales"> <i class="menu-icon fa fa-bar-chart"></i>Predict Sales</a>
+                        <a href="/predict-sales"> <i class="menu-icon fa fa-bar-chart"></i>Sales/User Score</a>
                     </li>
                     <li>
-                        <a href="/genre-classify"> <i class="menu-icon fa fa-area-chart"></i>Classify Genre</a>
+                        <a href="/genre-classify"> <i class="menu-icon fa fa-area-chart"></i>Genre</a>
                     </li>
                     <li>
-                        <a href="/uscore-clustering"> <i class="menu-icon fa fa-table"></i>Cluster User Score</a>
+                        <a href="/uscore-clustering"> <i class="menu-icon fa fa-table"></i>User Score</a>
                     </li>
 
 
@@ -262,7 +262,8 @@
                             </div>
 
                             <div class="wrap-input1 validate-input mt-3" data-validate="Name is required">
-                                <input class="input1" type="text" name="gSales" placeholder="Globle Sales" value ='{{ rVal }}'>
+                                <input class="input1" type="text" name="gSales" placeholder="Globle Sales"
+                                    value='{{ rVal }}'>
                                 <span class="shadow-input1"></span>
                             </div>
 
@@ -280,51 +281,49 @@
                                 </button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-            <div class="results row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8 mt-3 ml-result">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-one">
-                                        <div class="stat-icon dib"><i class="ti-money text-success border-success"></i>
+
+                        <div class="results row mt-5">
+                            <div class="col-md-6 mx-auto">
+                                <div class="card text-white bg-flat-color-1" style="border: 1px solid #000000; border-radius: 5px;">
+                                    <div class="card-body pb-3">
+                                        <div class="dropdown float-right">
+                                            <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
+                                                id="dropdownMenuButton1" data-toggle="dropdown">
+                                                <i class="fa fa-cog"></i>
+                                            </button>
                                         </div>
-                                        <div class="stat-content dib">
-                                            <div class="stat-text">Predicted Globle Sales</div>
-                                            <div class="stat-digit">{{ rVal }}</div>
-                                        </div>
+                                        <h4 class="mb-0">
+                                            <span class="count">{{ rVal }}</span>
+                                        </h4>
+                                        <p class="text-light">Globle Sales(Millions)</p>
                                     </div>
+                
+                                </div>
+                            </div>
+                            <div class="col-md-6 mx-auto">
+                                <div class="card text-white bg-flat-color-1" style="border: 1px solid #000000; border-radius: 5px;">
+                                    <div class="card-body pb-3">
+                                        <div class="dropdown float-right">
+                                            <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button"
+                                                id="dropdownMenuButton1" data-toggle="dropdown">
+                                                <i class="fa fa-cog"></i>
+                                            </button>
+                                        </div>
+                                        <h4 class="mb-0">
+                                            <span class="count">{{ score }}</span>
+                                        </h4>
+                                        <p class="text-light">User Score</p>
+                                    </div>
+                
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2"></div>
                     </div>
+
                 </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8 mt-3 ml-result">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-one">
-                                        <div class="stat-icon dib"><i class="ti-money text-success border-success"></i>
-                                        </div>
-                                        <div class="stat-content dib">
-                                            <div class="stat-text">Predicted User Score</div>
-                                            <div class="stat-digit">{{ score }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2"></div>
-                    </div>
-                </div>
+                
             </div>
+
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->

@@ -2633,8 +2633,8 @@ iframe {
 }
 
 .ml-form-pic img {
-  max-width: 50%;
-  margin: 0% 25% 0% 25%;
+  max-width: 100%;
+  margin: 0;
 }
 .ml-form-pic .ml-result{
   margin: auto;
