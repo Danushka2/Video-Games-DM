@@ -324,12 +324,12 @@ def usCluster():
 
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
 
-    return render_template('uscore-cluster.html',
-                           ids=ids,
-                           graphJSON=graphJSON,
-                           score = pred)
+#    return render_template('uscore-cluster.html',
+#                           ids=ids,
+#                           graphJSON=graphJSON,
+#                           score = pred)
 
-    #return render_template('uscore-cluster.html', score = pred)
+    return render_template('uscore-cluster.html', score = pred)
 
 
 
