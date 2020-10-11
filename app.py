@@ -36,7 +36,7 @@ def home():
                 ),
             ],
             layout=dict(
-                title='Platform vs Glable Sales'
+                title='Platform vs Global Sales'
             )
         ),
 
@@ -46,7 +46,7 @@ def home():
                 )
             ],
             layout=dict(
-                title='Genre vs Globle Sales'
+                title='Genre vs Global Sales'
             )
         )
     ]
@@ -155,7 +155,7 @@ def cGenre():
                 ),
             ],
             layout=dict(
-                title='Avarage Glable Sales'
+                title='Average Global Sales'
             )
         )
     ]
@@ -222,7 +222,7 @@ def genreClassify():
                 ),
             ],
             layout=dict(
-                title='Avarage Glable Sales'
+                title='Avarage Global Sales'
             )
         )
     ]
