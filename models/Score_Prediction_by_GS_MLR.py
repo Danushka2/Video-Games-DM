@@ -132,24 +132,16 @@ pickle.dump(regr,open('MultipleLinearRegression.pkl','wb'))
 
 # testing the model
 model = pickle.load(open('MultipleLinearRegression.pkl','rb'))
-# predict using a value
-
-
-df[['Critic_Score','Global_Sales','Critic_Count']].iloc[0]
 
 new_row = {'Critic_Score':76, 'Global_Sales':82.53, 'Critic_Count':51}
 df_Apnd = df.append(new_row, ignore_index=True)
 
-df_Apnd[['Critic_Score','Global_Sales','Critic_Count']].iloc[-1]
-
 # Get features and labels
 newDF2 = df_Apnd[['Critic_Score','Global_Sales','Critic_Count']]
 M = newDF2
-N = df_Apnd.iloc[:,3].values
 
 # Encoding
 objList2 = M.select_dtypes(include = "object").columns
-
 
 l = M.iloc[-1].values
 

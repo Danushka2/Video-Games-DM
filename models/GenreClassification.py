@@ -26,7 +26,6 @@ df=cleanedDS.clean_db()
 
 
 newDF = df[['Name','Platform','Year_of_Release','Publisher','Rating']]
-
 X = newDF
 
 Y = df.iloc[:,3].values
@@ -70,18 +69,11 @@ pickle.dump(KNN,open('GenreClassifier.pkl','wb'))
 # testing the model
 model = pickle.load(open('GenreClassifier.pkl','rb'))
 
-
-df[['Name','Platform','Year_of_Release','Publisher','Rating']].iloc[0]
-
-
 new_row = {'Name': 'Call of Duty: Black Ops II','Platform':'PS3','Year_of_Release':2012, 'Publisher':'Activision', 'Rating':'E'}
 df_Apnd = df.append(new_row, ignore_index=True)
 
-df_Apnd[['Name','Platform','Year_of_Release','Publisher','Rating']].iloc[-1]
-
 newDF2 = df_Apnd[['Name','Platform','Year_of_Release','Publisher','Rating']]
 M = newDF2
-N = df_Apnd.iloc[:,5].values
 
 objList2 = ['Name','Platform','Year_of_Release','Publisher','Rating']
 le = LabelEncoder()
@@ -94,4 +86,3 @@ l = M.iloc[-1].values
 pred = model.predict(l.reshape(-1, 5))
 
 print(pred)
-

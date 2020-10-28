@@ -14,14 +14,16 @@ import pandas as pd
 import plotly.express as px
 
 app = Flask(__name__)
-model = pickle.load(open('testModel.pkl', 'rb'))
 
 cleanData = cleanDs()
 df = cleanData.clean_db()
 
+
+########################################################################################################################
+#################################################### Routes ############################################################
+
 @app.route('/')
 def home():
-#    return render_template('index.html', url ='/static/images/line_plot.jpg')
 
     labels = df['Genre']
     values = df['Global_Sales']
@@ -65,7 +67,9 @@ def home():
                            graphJSON=graphJSON)
 
 
-############################# Sales and User Score prediction ######################################
+##########################################################################################################################
+########################################### Sales and User Score prediction ##############################################
+
 @app.route('/predict-sales')
 def pSales():
     return render_template('sale-prediction.html')
@@ -79,7 +83,7 @@ def predicSalesNew():
     salePublisher = request.form['salePublisher']
     saleDeveloper = request.form['saleDeveloper']
     
-    model = pickle.load(open('DecisionTreeRegression.pkl','rb'))
+    model = pickle.load(open('./models/pklFiles/DecisionTreeRegression.pkl','rb'))
 
     new_row = {'Year_of_Release':saleYear, 'Platform': salePlatform, 'Genre': saleGnre, 'Publisher': salePublisher, 'Developer': saleDeveloper}
     df_Apnd = df.append(new_row, ignore_index=True)
@@ -88,7 +92,6 @@ def predicSalesNew():
     ##################  Get features and labels     ######################
     newDF2 = df_Apnd[['Year_of_Release','Platform','Genre','Publisher','Developer']]
     M = newDF2
-    N = df_Apnd.iloc[:,5].values
 
     ###################  Encoding #########################
     objList2 = M.select_dtypes(include = "object").columns
@@ -114,7 +117,7 @@ def usPrediction():
     cCount = float(request.form['cCount'])
     
 
-    model = pickle.load(open('MultipleLinearRegression.pkl','rb'))
+    model = pickle.load(open('./models/pklFiles/MultipleLinearRegression.pkl','rb'))
     # predict using a value
 
     new_row = {'Critic_Score': cScore, 'Global_Sales': gSales, 'Critic_Count':cCount}
@@ -123,7 +126,6 @@ def usPrediction():
     ##################  Get features and labels     ######################
     newDF2 = df_Apnd[['Critic_Score','Global_Sales','Critic_Count']]
     M = newDF2
-    N = df_Apnd.iloc[:,5].values
 
     l = M.iloc[-1].values
 
@@ -132,11 +134,13 @@ def usPrediction():
     
     return render_template('sale-prediction.html', rVal = gSales, score = pred)
 
-############################# Genre prediction ######################################
+
+############################################################################################################################
+################################################## Genre prediction ########################################################
 
 @app.route('/genre-classify')
 def cGenre():
-    #return render_template('genre-classify.html')
+
     graphs = [
         dict(
             data=[
@@ -169,12 +173,10 @@ def cGenre():
                            graphJSON=graphJSON)
 
 
-
-
 @app.route('/c-genre', methods=['POST'])
 def genreClassify():
 
-    model = pickle.load(open('GenreClassifier.pkl','rb'))
+    model = pickle.load(open('./models/pklFiles/GenreClassifier.pkl','rb'))
 
     gameName = request.form['gameName']
     gamePlatform = request.form['gamePlatform']
@@ -182,17 +184,12 @@ def genreClassify():
     gamePublisher = request.form['gamePublisher']
     gameRating = request.form['gameRating']
     
-
-#    new_row = {'Name': 'Call of Duty: Black Ops II','Platform':'PS3','Year_of_Release':2012, 'Publisher':'Activision', 'Rating':'E'}
     new_row = {'Name': gameName,'Platform': gamePlatform,'Year_of_Release': gameYear, 'Publisher': gamePublisher, 'Rating': gameRating}
-
     df_Apnd = df.append(new_row, ignore_index=True)
 
-    df_Apnd[['Name','Platform','Year_of_Release','Publisher','Rating']].iloc[-1]
 
     newDF2 = df_Apnd[['Name','Platform','Year_of_Release','Publisher','Rating']]
     M = newDF2
-    N = df_Apnd.iloc[:,5].values
 
     objList2 = ['Name','Platform','Year_of_Release','Publisher','Rating']
     le = LabelEncoder()
@@ -235,15 +232,13 @@ def genreClassify():
                            ids=ids,
                            graphJSON=graphJSON,
                            genre = pred)
-    
-    #return render_template('genre-classify.html', genre = pred)
 
 
-############################# User Score Clustering ######################################
+###########################################################################################################################
+############################# User Score Clustering #######################################################################
 
 @app.route('/uscore-clustering')
 def uscoreCluster():
-    #return render_template('uscore-cluster.html')
     
     dfs = df[['Global_Sales','User_Score','Critic_Score']]
     figx = px.scatter_3d(dfs, x='Global_Sales', y='User_Score', z='Critic_Score')
@@ -266,8 +261,6 @@ def uscoreCluster():
                            graphJSON=graphJSON)
 
 
-
-
 @app.route('/us-cluster', methods=['POST'])
 def usCluster():
     
@@ -276,7 +269,7 @@ def usCluster():
     cCount = float(request.form['cCount'])
     
 
-    model = pickle.load(open('ClusteringPredict.pkl','rb'))
+    model = pickle.load(open('./models/pklFiles/ClusteringPredict.pkl','rb'))
     # predict using a value
 
     new_row = {'User_Score': cScore, 'Global_Sales': gSales, 'Critic_Score': cCount}
@@ -285,7 +278,6 @@ def usCluster():
     # Get features and labels
     newDF2 = df_Apnd[['User_Score','Global_Sales','Critic_Score']]
     M = newDF2
-    N = df_Apnd.iloc[:,3].values
 
     # Encoding
     objList2 = M.select_dtypes(include = "object").columns
@@ -328,48 +320,6 @@ def usCluster():
                            ids=ids,
                            graphJSON=graphJSON,
                            score = pred)
-
-    #return render_template('uscore-cluster.html', score = pred)
-
-
-
-
-
-
-
-
-
-@app.route('/test')
-def indexT():
-    
-   
-    import plotly.express as px
-    dfs = df[['Global_Sales','User_Score','Critic_Score']]
-    figx = px.scatter_3d(dfs, x='Global_Sales', y='User_Score', z='Critic_Score')
-    
-    figx.update_layout(
-        margin=dict(l=0, r=0, b=0, t=0),
-        autosize = True
-        )
-    
-    graphs = [
-        figx
-    ]
-
-    ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
-
-    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-
-    return render_template('test.html',
-                           ids=ids,
-                           graphJSON=graphJSON)
-
-
-
-
-
-
-
 
 
 

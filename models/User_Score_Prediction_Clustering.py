@@ -76,18 +76,12 @@ pickle.dump(kmeans,open('ClusteringPredict.pkl','wb'))
 # testing the model
 model = pickle.load(open('ClusteringPredict.pkl','rb'))
 
-
-df[['User_Score','Global_Sales','Critic_Score']].iloc[0]
-
 new_row = {'User_Score':1, 'Global_Sales':12, 'Critic_Score':20}
 df_Apnd = df.append(new_row, ignore_index=True)
-
-df_Apnd[['User_Score','Global_Sales','Critic_Score']].iloc[-1]
 
 # Get features and labels
 newDF2 = df_Apnd[['User_Score','Global_Sales','Critic_Score']]
 M = newDF2
-N = df_Apnd.iloc[:,3].values
 
 # Encoding
 objList2 = M.select_dtypes(include = "object").columns
@@ -110,6 +104,3 @@ elif clstr == 2:
 else:
     print("Cluster D")
 print(clstr)
-
-
-

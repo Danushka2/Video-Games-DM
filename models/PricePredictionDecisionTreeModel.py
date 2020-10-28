@@ -58,17 +58,13 @@ model = pickle.load(open('DecisionTreeRegression.pkl','rb'))
 #k = le.fit_transform([1985,'NES','Platform','Nintendo','Open Source'])
 
 
-df[['Year_of_Release','Platform','Genre','Publisher','Developer']].iloc[0]
 
 new_row = {'Year_of_Release':1985, 'Platform':'NES', 'Genre':'Platform', 'Publisher':'Nintendo', 'Developer':'Open Source'}
 df_Apnd = df.append(new_row, ignore_index=True)
 
-df_Apnd[['Year_of_Release','Platform','Genre','Publisher','Developer']].iloc[-1]
-
 ##################  Get features and labels     ######################
 newDF2 = df_Apnd[['Year_of_Release','Platform','Genre','Publisher','Developer']]
 M = newDF2
-N = df_Apnd.iloc[:,5].values
 
 ###################  Encoding #########################
 objList2 = M.select_dtypes(include = "object").columns
@@ -82,5 +78,3 @@ l = M.iloc[-1].values
 
 #print(model.predict(k.reshape(1,-1)))
 print(model.predict(l.reshape(1,-1)))
-
-
